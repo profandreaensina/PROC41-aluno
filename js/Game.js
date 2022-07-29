@@ -7,7 +7,7 @@
 
     this.leader1 = createElement("h2");
     this.leader2 = createElement("h2");
-    this.playerMoving = false;
+    //01. adicionar propriedade playerMoving igual a falsa 
   }
 
   getState() {
@@ -58,14 +58,11 @@
       { x: width / 2, y: height - 5300, image: obstacle1Image },
       { x: width / 2 - 180, y: height - 5500, image: obstacle2Image }
     ];
-
-    // Adicionar sprite de combustível no jogo
+    
     this.addSprites(fuels, 4, fuelImage, 0.02);
 
-    // Adicionar sprite de moeda no jogo
     this.addSprites(powerCoins, 18, powerCoinImage, 0.09);
 
-    //Adicionar sprite de obstáculo no jogo
     this.addSprites(
       obstacles,
       obstaclesPositions.length,
@@ -101,7 +98,6 @@
     form.titleImg.position(40, 50);
     form.titleImg.class("gameTitleAfterEffect");
 
-    //C39
     this.resetTitle.html("Reiniciar Jogo");
     this.resetTitle.class("resetText");
     this.resetTitle.position(width / 2 + 200, 40);
@@ -165,7 +161,7 @@
 
       const finshLine = height * 6 - 100;
 
-      if (player.positionY > finshLine) {
+      if (/*02. adicionar condição para mudar estado de jogo*/) {
         gameState = 2;
         player.rank += 1;
         Player.updateCarsAtEnd(player.rank);
@@ -218,7 +214,6 @@
       (players[0].rank === 0 && players[1].rank === 0) ||
       players[0].rank === 1
     ) {
-      // &emsp;    Essa etiqueta é usada para exibir quatro espaços.
       leader1 =
         players[0].rank +
         "&emsp;" +
@@ -256,7 +251,7 @@
 
   handlePlayerControls() {
     if (keyIsDown(UP_ARROW)) {
-      this.playerMoving = true;
+      // 03. mudar playerMoving indicando que o jogador local está se movendo
       player.positionY += 10;
       player.update();
     }
@@ -278,10 +273,7 @@
       collected.remove();
     });
 
-    // reduzindo o combustível do carro
-    if (player.fuel > 0 && this.playerMoving) {
-      player.fuel -= 0.3;
-    }
+    // 04. criar if que analisa se o jogador esta se movendo E seu combustivel é maior que 0
 
     if (player.fuel <= 0) {
       gameState = 2;
@@ -313,7 +305,7 @@
   gameOver() {
     swal({
       title: `Fim de Jogo`,
-      text: "Oops você perdeu a corrida!",
+      text: // 05. adicionar mensagem que aparecerá quando o jogo encerrar
       imageUrl:
         "https://cdn.shopify.com/s/files/1/1061/1924/products/Thumbs_Down_Sign_Emoji_Icon_ios10_grande.png",
       imageSize: "100x100",
